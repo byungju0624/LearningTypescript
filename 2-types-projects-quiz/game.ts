@@ -14,7 +14,7 @@ function move(str: Direction) {
     case "right":
       return position.x++;
     default:
-      new Error("unknown direction");
+     throw new Error("unknown direction");
   }
   //   if (str === "up") {
   //     position.y++;
