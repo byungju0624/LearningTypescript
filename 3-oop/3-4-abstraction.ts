@@ -3,8 +3,19 @@
     shots: number;
     hasMilk: boolean;
   };
+  interface ICoffeeMaker {
+    makeCoffee(shots: number): CoffeeCup;
+  } // 의사소통이 규약을 명시해 놓은 계약서 같은 것
 
-  class CoffeeMaker {
+  interface ICommercialCoffeeMaker {
+    makeCoffee(shots: number): CoffeeCup;
+    fillCoffeeBeans(beans: number): void;
+    clean(): void;
+  }
+
+  class CoffeeMaker implements ICoffeeMaker, ICommercialCoffeeMaker {
+    //위의 인터페이스를 구현하는 클래스,
+    //인터페이스를 구현하는 클래스는 인터페이스에 적혀있는 모든 함수를 적어줘야한다.
     private static BEANS_GRAMM_PER_SHOT = 7;
     private coffeeBeans: number = 0;
     private constructor(coffeeBeans: number) {
@@ -15,11 +26,13 @@
     }
 
     fillCoffeeBeans(beans: number) {
-      // 조금더 안정성을 높일 수 있다.
       if (beans < 0) {
         throw new Error("value for beans should be greater than 0");
       }
       this.coffeeBeans += beans;
+    }
+    clean() {
+      console.log("cleaning the mashine");
     }
     private grindBeans(shots: number) {
       console.log(`grind beans for ${shots}`);
@@ -57,6 +70,30 @@
   }
   const user = new User("byungju", "jeong");
   console.log(user.fullName);
-  maker.makeCoffee(2); //추상화는 인터페이스를 굉장히 간단하게 만듦으로써 사용자가 간편하게 사용가능하다.
-  //인캡슐레이션(정보은닉)을 통해서 추상화가 가능하다. 또한 인터페이스를 통해서 추상화 가능
+  maker.makeCoffee(2);
+
+  //추상화는 인터페이스를 굉장히 간단하게 만듦으로써 사용자가 간편하게 사용가능하다.
+  //인캡슐레이션(정보은닉)을 통해서 추상화가 가능하다. 또한 인터페이스를 통해서 추상화 가능,
+
+  class AmateurUser {
+    constructor(private machine: ICoffeeMaker) {}
+    makeCoffee() {
+      const coffee = this.machine.makeCoffee(2);
+      console.log(coffee);
+    }
+  }
+
+  class ProBarista {
+    constructor(private machine: ICommercialCoffeeMaker) {}
+    makeCoffee() {
+      const coffee = this.machine.makeCoffee(2);
+      console.log(coffee);
+      this.machine.fillCoffeeBeans(45);
+      this.machine.clean();
+    }
+  }
+  const maker2: ICommercialCoffeeMaker = CoffeeMaker.makerMachine(32);
+  const amateur = new AmateurUser(maker2);
+  const pro = new ProBarista(maker2);
+  pro.makeCoffee(); //동일한 오브젝트의 인스턴스일지라도 두가지의 인터페이스를 구현하기 때문에 인터페이스에서 규약된 함수들만 접근이 가능하다.
 }
