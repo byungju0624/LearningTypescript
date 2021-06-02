@@ -4,7 +4,7 @@
   function printArray(fruits: readonly string[]) {
     //읽기만 가능하고 변경 불가능하다.
   }
-  //Tuple -> 서로다른 타입을 함께 가질 수 있는 배열, interfase, type alias, class
+  //Tuple -> 서로다른 타입을 함께 가질 수 있는 배열, interfase, type alias, class 대체해서 사용하는 것이 좋다.
   let student: [string, number];
   student = ["name", 123];
   student[0];
