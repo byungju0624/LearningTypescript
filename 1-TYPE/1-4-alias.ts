@@ -2,6 +2,7 @@
   /*
     ** Type Alias
     -> 새로운 타입을 정의할 수 있다.
+    -> 원시 타입 뿐만 아니라 오브젝트 타입으로도 정의할 수 있다.
     */
   type Text = string;
   const name: Text = "byungju";
