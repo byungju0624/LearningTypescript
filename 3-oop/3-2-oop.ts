@@ -6,7 +6,7 @@
   //청사진
   class CoffeeMaker {
     //static은 멤버변수 뿐만 아니라 함수에서도 사용 가능하다.
-    static BEANS_GRAMM_PER_SHOT = 7; //타입추론을 이용할 수 있기때문에 타입을 따로 정해주지 않아도 된다. static을 사용하면 classLevel
+    static BEANS_GRAMM_PER_SHOT = 7; //타입추론을 이용할 수 있기때문에 타입을 따로 정해주지 않아도 된다. static을 사용하면 class Level
     coffeeBeans: number = 0;
     constructor(coffeeBeans: number) {
       //인스턴스를 만들때 항상 처음에 호출 되는 함수
