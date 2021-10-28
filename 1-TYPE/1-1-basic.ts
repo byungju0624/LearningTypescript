@@ -1,6 +1,7 @@
 {
   /**
    * Javascript
+   * let: es6부터 생겼다.
    * primitive: number, string, boolean, bigint, symbol, null, undefined
    * object: function, array
    **/

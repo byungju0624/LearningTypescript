@@ -1,12 +1,12 @@
 {
-  // // JavaScript
-  // function jsAdd(num1, num2) {
-  //   return num1 + num2;
-  // }
-  // // typeSctipt
-  // function Add(num1: number, num2: number): number {
-  //   return num1 + num2;
-  // }
+  // JavaScript
+  function jsAdd(num1, num2) {
+    return num1 + num2;
+  }
+  // typeSctipt
+  function Add(num1: number, num2: number): number {
+    return num1 + num2;
+  }
   // // JavaScript
   // function jsFetchNum(id) {
   //   //     code... code...     code...
