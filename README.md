@@ -12,13 +12,25 @@
 >
 > - primitive: number, string, boolean, bigint(더 큰 숫자의 범위를 설정), null, undefined, symbol
 >   - Number Type
->     `const num:number = 1 `
->   - String Type
->     `const str:string ='hello'`
->   - Boolean Type
->     `const boal:boolean = false`
->   - undefined: 값이 있는지 없는지 아무것도 결정되지 않은 상태, 단독적으로 쓰지는 않는다.
->   - null: 조금 더 명확하게 비어있다라고 결정된 것
+
+```javascript
+const num: number = 1;
+```
+
+> - String Type
+
+```javascript
+const str: string = "hello";
+```
+
+> - Boolean Type
+
+```javascript
+const boal: boolean = false;
+```
+
+> - undefined: 값이 있는지 없는지 아무것도 결정되지 않은 상태, 단독적으로 쓰지는 않는다.
+> - null: 조금 더 명확하게 비어있다라고 결정된 것
 > - unknown: 어떤 데이터 타입이든 변수에 담을 수 있다. 가능하면 쓰지 않는 것이 좋다.
 > - any: 무엇이든 할당할 수 있다. 가능하면 쓰지 않는 것이 좋다.
 > - void: 아무것도 리턴하지 않으면 자동으로 void라는 타입이 된다. void의 경우 생략 가능하다. 변수에 선언해서 쓰는 일은 극히 드물다.
@@ -38,12 +50,21 @@
 > 3. Array, Tuple
 >
 > - Array 정의 방법
->
-> `const fruits: string[] = ['hello','world'] ` > `const scores: Array<number> = [1,2,3]`
->
+
+```javascript
+const fruits: string[] = ["hello", "world"];
+const scores: Array<number> = [1, 2, 3];
+```
+
 > - readonly: 데이터를 읽을 수만 있게 만들 수 있다. **readonly**는 첫번재 버전에서만 사용가능하기 때문에 코드의 일관성을 지키고 싶으면 첫번째 버전을 사용하는 것이 유용하다.
 > - Tuple: 서로다른 타입을 함께 가질 수 있는 배열
->   `let student: [string,number]` > `student = ['name', 10]` > `student[0]//name` > `studnet[1]//10`
+
+```javascript
+let student: [string,number] student = ['name', 10] ;
+student[0]//name
+studnet[1]//10
+```
+
 > - Tuple사용은 권장하지 않는다. 데이터에 접근할 때 인덱스처럼 접근하는 것이 가독성이 떨어진다. 데이터에 직접 접근하기 전에는 어떤 값이 들어 있는 지 확인하기 힘들다. interface, type alias, class로 대체 가능
 
 ---
