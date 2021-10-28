@@ -69,6 +69,43 @@ studnet[1]//10
 
 ---
 
+> 4. Type Alias
+>
+> - 원시 타입 뿐만 아니라 오브젝트 타입을 우리가 원하는 새로운 타입으로 정의할 수 있다. 다양한 타입을 지정할 수 있다.
+
+```typescript
+type Text = string;
+const name: Text = "hello";
+const address: Text = "korea";
+type Num = number;
+type Student = {
+  name: string;
+  age: number;
+};
+const student: Student = {
+  name: "name",
+  age: 12,
+};
+```
+
+> - String Literal Types
+> - 타입을 문자열로도 지정할 수 있다.
+
+---
+
+> 5. Union Types
+>
+> - or로 생각하고 있으면 된다. 모든 가능한 케이스 중 발생할 수 있는 딱 하나를 받을 수 있는 타입을 만들고 싶을 때 사용, 활용도가 높은 타입
+
+```typescript
+type Direction = "left" | "right" | "up" | "down";
+function move(direction: Direction) {
+  console.log(direction);
+}
+```
+
+---
+
 > - 객체지향 4가지 원칙
 >   - 캡슐화: 서로 연관있는 데이터와 함수들을 캡슐화하는 것. 내부의 상태를 외부에서 설정할 수 없다. 외부의 행동을 통해서 내부의 상태를 변경할 수 있다.
 >   - 추상화: 내부의 복잡한 기능을 다 이해하지 않고 외부에서 간단한 인터페이스를 통해서 쓸 수 있는 것.
