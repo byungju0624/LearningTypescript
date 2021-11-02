@@ -3,18 +3,18 @@
     shots: number;
     hasMilk: boolean;
   };
-  interface ICoffeeMaker {
+  interface CoffeeMachine {
     makeCoffee(shots: number): CoffeeCup;
   }
 
-  class CoffeeMaker implements ICoffeeMaker {
+  class CoffeeMachine implements CoffeeMachine {
     private static BEANS_GRAMM_PER_SHOT = 7;
     private coffeeBeans: number = 0;
     constructor(coffeeBeans: number) {
       this.coffeeBeans = coffeeBeans;
     }
-    static makerMachine(coffeeBeans: number): CoffeeMaker {
-      return new CoffeeMaker(coffeeBeans);
+    static makerMachine(coffeeBeans: number): CoffeeMachine {
+      return new CoffeeMachine(coffeeBeans);
     }
 
     fillCoffeeBeans(beans: number) {
@@ -28,10 +28,10 @@
     }
     private grindBeans(shots: number) {
       console.log(`grind beans for ${shots}`);
-      if (this.coffeeBeans < shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT) {
+      if (this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT) {
         throw new Error("Not enough coffee beans");
       }
-      this.coffeeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT;
+      this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT;
     }
     private preheat(): void {
       console.log("heating up...");
@@ -51,7 +51,7 @@
   } //인터페이스 구현시 implements 사용
 
   //다른 클래스를 상속할 때 extends사용, overwriting: 자식클래스에서 부모클래스에 있는 함수를 덮어 씌울 수 있다.
-  class CafeLatteMachine extends CoffeeMaker {
+  class CafeLatteMachine extends CoffeeMachine {
     constructor(beans: number, private serialNumber: string) {
       super(beans);
     }
@@ -64,9 +64,9 @@
       return { ...coffee, hasMilk: true };
     }
   }
-  const maker = CoffeeMaker.makerMachine(32);
+  const maker = CoffeeMachine.makerMachine(32);
 
-  const machine = new CoffeeMaker(23);
+  const machine = new CoffeeMachine(23);
   const latteMachine = new CafeLatteMachine(23, "sssssss");
   const coffee = latteMachine.makeCoffee(1);
   console.log(coffee);
