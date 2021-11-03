@@ -13,6 +13,6 @@
     }
   }
   const either = new SimpleEither({ 1: 1 }, "byung");
-  either.left();
-  either.right();
+  console.log(either.left());
+  console.log(either.right());
 }

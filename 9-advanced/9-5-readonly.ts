@@ -5,5 +5,5 @@
     description: string;
   };
 
-  function display(todo: ToDo) {}
+  function display(todo: ReadOnly<ToDo>) {}
 }

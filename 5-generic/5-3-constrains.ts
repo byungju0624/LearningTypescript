@@ -30,6 +30,7 @@
   const ellieAfterPay = pay(ellie); //세부 클래스의 정보를 잃어버린다.
   const bobAfterPay = pay(bob);
   function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {
+    // keyof A: A안에 들어있는 키 중 하나를 말한다.
     return obj[key];
   }
   const obj = {

@@ -30,7 +30,7 @@ class StackImpl implements Stack {
     return node.value;
   }
 }
-const stack = new StackImpl();
+const stack = new StackImpl(); 
 stack.push("byung");
 stack.push("byung1");
 stack.push("byung2");

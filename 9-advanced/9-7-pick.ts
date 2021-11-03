@@ -13,7 +13,8 @@
       data: "byte-data...",
     };
   }
-  function getVideoMetaData(id: string) {
+  type VideoMetaData = Pick<Video, "id" | "title">;
+  function getVideoMetaData(id: string): VideoMetaData {
     return {
       id: id,
       title: "title",
