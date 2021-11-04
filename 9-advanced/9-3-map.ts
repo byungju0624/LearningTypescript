@@ -13,10 +13,11 @@ type ReadOnly<T> = {
   readonly [P in keyof T]: T[P];
 };
 type videoOptional = Optional<Video>;
-const video: videoOptional = {};
-const video: ReadOnly<Video> = {
+
+const video: Optional<Video> = {
   title: "hello",
   author: "hi",
+  
 };
 // type VideoOptional = {
 //     title?: string,

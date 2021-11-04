@@ -249,3 +249,152 @@ text = 1; //type error
 >
 > - 타입 변환이 가능하다. 한가지의 타입을 기본으로 해서 다른 타입으로 변환이 가능하다.
 > - condition type: 조건에 따라 타입을 변경할 수 있다.
+>   //
+
+---
+
+> 14. Prototype
+>
+> - 상속을 위해서 쓰이는 것
+> - 클래스에서 속성과 함수를 정의 한 것처럼 마찬가지로 동일하게 반복적으로 쓰일 수있게 속성과 함수를 정의하는 것
+> - 자바스크립트는 프로토타입을 기반으로 한 프로그래밍 언어, 객체지향프로그래밍을 할 수 있는 한 방법.
+> - 모든 오브젝트는 프로토라는 오브젝트를 갖고 있다.
+> - 다른 변수에 할당한 오브젝트의 프로토는 같은 오브젝트를 상속받기 때문에 같다.
+
+```javascript
+const x = {};
+const y = {};
+console.log(x.__proto__ === y.__proto__); // true
+```
+
+---
+
+> 15. This
+>
+> - 다른 객체지향언어에서의 This는 클래스 자신을 가리키는 것. 만들어진 객체 그 자신을 가리키는 것
+> - 자바스크립트에서의 This는 누가 부르냐에 따라서 This가 달라질 수 있다. 호출한 문맥에 따라서 This가 동적으로 변한다.
+> - 브라우저 환경에서의 This는 Window(global object)를 가리킨다.
+
+```javascript
+console.log(this); // window
+
+class Counter {
+  count = 0;
+  increase = function () {
+    console.log(this);
+  };
+}
+const counter = new Counter();
+counter.increase(); // 여기서의 this는 Counter를 가리킨다.
+```
+
+> - let 과 const로 선언한 변수는 window에 등록돼 있지 않으므로 변수를 호출하는 것은 window가 아니라 어느 object도 아니기 때문에 undefined가 호출된다.
+
+```javascript
+class Counter {
+  count = 0;
+  increase = function () {
+    console.log(this);
+  };
+}
+const counter = new Counter();
+const caller = counter.increase; // undefined-> 포인터가 클래스에서 변수로 바뀌면서 this의 정보를 잃어버린다.
+```
+
+> - 우리가 선언한 함수는 기본적으로 window 객체에 등록된다.
+> - var같은 경우는 window객체에 등록된다.
+> - 정보를 잃어버리지 않으려면 할당할 때 binding을 해주면 된다.
+
+```javascript
+....
+const caller = counter.increase.bind(counter)
+```
+
+> - 하나하나 binding을 해주는 대신 class 내부 함수를 화살표함수로 만들면 해결된다.
+
+```javascript
+class Counter {
+  count = 0;
+  increase = () => {
+    console.log(this);
+  };
+}
+const counter = new Counter();
+const caller = counter.increase; // Counter를 가리킨다.
+```
+
+> - 화살표 함수를 이용하면 선언될 당시의 문맥, 스코프의 this context를 유지한다.
+
+---
+
+> 16. Module
+>
+> - 자바스크립트에서 module이란 파일안에 코드를 모듈화 해서 작성하는 것
+> - 한 모듈이라 하는 것은 한 파일안에 작성되어 있는 코드를 말한다.
+> - 따로 모듈화해서 작성하지 않으면 코드는 글로벌 스코프로 측정된다.
+> - 브라우저 환경이라면 window에 노드 환경이라면 global에 등록된다.
+> - 각각의 파일에서 동일한 이름의 함수를 만들었다면 충돌이 생길 수 있다.
+> - 모듈화 해놓으면 서로 다른 파일에서는 접근할 수 없다.
+> - type을 module이라고 지정하면 다른 두 파일이 서로 접근할 수 없게 된다.
+
+```javascript
+<script type='module' src='module1.js'></script>
+<script type='module' src='module2.js'></script>
+//서로 접근할 수 없다.
+```
+
+> - 다른 모듈에서 사용하려면 export.default를 사용하면 된다.
+> - 사용하려면 import를 사용하면 된다.
+
+```javascript
+//module1.js
+export.default function add(x,y){
+  return x + y
+}
+//module2.js
+import add from './module1.js'
+console.log(10,1)
+```
+
+> - import하는 곳에서는 어떤 이름을 써도 상관없이 정의해서 쓸 수 있다.
+> - 한 파일에서 두가지 export.default를 사용할 수 없다. 한 파일에서는 무조건 하나여야 한다.
+> - 다른 함수를 가져오려면 중괄호{}를 사용하여 가져온다.
+
+```javascript
+//module1.js
+...(생략)
+export function minus(a,b){
+  return a- b
+}
+//module2.js
+import add,{minus} from './module1.js' //default요소 빼고 다른 함수는 동일한 이름을 사용해줘야한다.
+console.log(minus(10,1))
+```
+
+> - 변경하고 싶으면 이름 뒤에 as를 붙여 바꾸면 된다.
+
+```javascript
+...(생략)
+import add,{minus as min} from './module1.js'
+console.log(min(10,1))
+```
+
+> - 같은 파일 안에 default 요소를 없애고 모든 함수를 가져오게 할 수 있다.
+
+```javascript
+...(생락)
+import * as calculator from './module1.js' // 파일 안에 export 함수 모두를 가져온다.
+console.log(calculator.add())
+console.log(calculator.minus())
+```
+
+> - 변수도 export할 수 있다.
+
+```javascript
+//module1.js
+...(생략)
+export const num = 10;
+//module2.js
+...(생략)
+console.log(calculator.num)
+```
